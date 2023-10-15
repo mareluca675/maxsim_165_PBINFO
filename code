@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    ifstream fin("maxsim.in");
+    ofstream fout("maxsim.out");
+    
+    long long n, v[1001], i, j, sum = 0, summax = -1, st, dr;
+    
+    fin >> n;
+    
+    for(i = 1; i <= n; i++)
+    {
+        fin >> v[i];
+    }
+    
+    if(n % 2 == 1)
+    {
+        for(i = 1, j = n; i < (n + 1) / 2, j > (n + 1) / 2; i++, j --)
+    {
+        sum = v[i] + v[j];
+        
+        if(sum >= summax)
+        {
+            st = i - 1;
+            dr = j + 1;
+            summax = sum;
+        }
+        
+        sum = 0;
+    }
+    }
+    
+    else
+    {
+        for(i = 1, j = n; i <= n / 2, j >= n / 2; i++, j --)
+    {
+        sum = v[i] + v[j];
+        
+        if(sum >= summax)
+        {
+            st = i;
+            dr = j;
+            summax = sum;
+        }
+        
+        sum = 0;
+    }
+    }
+    
+    fout << summax << " " << st << " " << dr;
+
+    return 0;
+}
